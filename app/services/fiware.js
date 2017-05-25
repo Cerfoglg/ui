@@ -49,8 +49,8 @@ export default Ember.Service.extend({
     }
 
     var url = Util.addQueryParams(this.get('access.token.redirectUrl'), {
-      state: this.generateState()
-      //redirect_uri: redirect
+      state: this.generateState(),
+      redirect_uri: redirect
     });
 
     return url;
