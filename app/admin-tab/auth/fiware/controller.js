@@ -103,7 +103,7 @@ export default Ember.Controller.extend({
 
       this.get('model').setProperties({
         'provider'          : 'fiwareconfig',
-        'enabled'           : false, // It should already be, but just in case..
+        'enabled'           : true, // It should already be, but just in case..
         'accessMode'        : 'unrestricted',
         'allowedIdentities' : [],
       });
