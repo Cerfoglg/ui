@@ -146,9 +146,6 @@ export default Ember.Controller.extend({
 
     authenticate: function() {
       this.send('clearError');
-      this.send('authenticationSucceeded', "");
-      return;
-      /*
       this.set('testing', true);
       this.get('fiware').authorizeTest((err,code) => {
         if ( err )
@@ -162,7 +159,6 @@ export default Ember.Controller.extend({
           this.set('testing', false);
         }
       });
-      */
     },
 
     gotCode: function(code) {
@@ -174,18 +170,18 @@ export default Ember.Controller.extend({
       });
     },
 
-    authenticationSucceeded: function() {
+    authenticationSucceeded: function(auth) {
       this.send('clearError');
-      //this.set('organizations', auth.orgs);
+      this.set('organizations', auth.orgs);
 
       let model = this.get('model').clone();
       model.setProperties({
         'enabled': true,
         'accessMode': 'unrestricted',
-        'allowedIdentities': [],
+        'allowedIdentities': [auth.userIdentity],
       });
 
-      let url = "http://"+window.location.hostname;
+      let url = window.location.href;
 
       model.save().then(() => {
         // Set this to true so the token will be sent with the request
