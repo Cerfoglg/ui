@@ -146,8 +146,8 @@ export default Ember.Controller.extend({
 
     authenticate: function() {
       this.send('clearError');
-      this.send('authenticationSucceeded', "")
-      return
+      this.send('authenticationSucceeded', "");
+      return;
       this.set('testing', true);
       this.get('fiware').authorizeTest((err,code) => {
         if ( err )
