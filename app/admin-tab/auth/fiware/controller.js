@@ -105,7 +105,7 @@ export default Ember.Controller.extend({
         'provider'          : 'fiwareconfig',
         'enabled'           : true, // It should already be, but just in case..
         'accessMode'        : 'unrestricted',
-        'allowedIdentities' : [],
+        'allowedIdentities' : [{name: "cerfoglg", externalId: "cerfoglg", kind: "fiware_user", id: "fiware_user:cerfoglg"}],
       });
 
       this.get('fiware').setProperties({
