@@ -156,7 +156,7 @@ export default Ember.Controller.extend({
         setTimeout(function() {
           window.location.href = "/";
         }, 2000);
-      }
+      });
       /*
       this.send('clearError');
       this.set('testing', true);
