@@ -152,9 +152,11 @@ export default Ember.Controller.extend({
         'accessMode': 'unrestricted',
         'allowedIdentities': [],
       });
-      setTimeout(function() {
-        window.location.href = "/";
-      }, 2000);
+      this.get('model').save().then(() => {
+        setTimeout(function() {
+          window.location.href = "/";
+        }, 2000);
+      }
       /*
       this.send('clearError');
       this.set('testing', true);
