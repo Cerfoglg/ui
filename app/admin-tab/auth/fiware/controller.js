@@ -103,9 +103,9 @@ export default Ember.Controller.extend({
 
       this.get('model').setProperties({
         'provider'          : 'fiwareconfig',
-        'enabled'           : true, // It should already be, but just in case..
+        'enabled'           : false, // It should already be, but just in case..
         'accessMode'        : 'unrestricted',
-        'allowedIdentities' : [{name: "cerfoglg", externalId: "cerfoglg", kind: "fiware_user", id: "fiware_user:cerfoglg"}],
+        'allowedIdentities' : [],
       });
 
       this.get('fiware').setProperties({
@@ -146,6 +146,17 @@ export default Ember.Controller.extend({
 
     authenticate: function() {
       this.send('clearError');
+      let model = this.get('model').clone();
+      model.setProperties({
+        'enabled': true,
+        'accessMode': 'unrestricted',
+        'allowedIdentities': [],
+      });
+      setTimeout(function() {
+        window.location.href = "/";
+      }, 2000);
+      /*
+      this.send('clearError');
       this.set('testing', true);
       this.get('fiware').authorizeTest((err,code) => {
         if ( err )
@@ -159,6 +170,7 @@ export default Ember.Controller.extend({
           this.set('testing', false);
         }
       });
+      */
     },
 
     gotCode: function(code) {
