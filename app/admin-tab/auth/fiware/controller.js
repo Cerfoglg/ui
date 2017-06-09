@@ -103,7 +103,7 @@ export default Ember.Controller.extend({
 
       this.get('model').setProperties({
         'provider'          : 'fiwareconfig',
-        'enabled'           : false, // It should already be, but just in case..
+        'enabled'           : true, // It should already be, but just in case..
         'accessMode'        : 'unrestricted',
         'allowedIdentities' : [],
       });
@@ -126,6 +126,10 @@ export default Ember.Controller.extend({
             saved: true,
             haveToken: true,
           });
+          $('#loading-underlay, #loading-overlay').removeClass('hide').show();
+          setTimeout(function() {
+            window.location.href = "/login";
+          }, 2000);
         }).catch((err) => {
           this.setProperties({
             saving: false,
@@ -146,21 +150,6 @@ export default Ember.Controller.extend({
 
     authenticate: function() {
       this.send('clearError');
-      let model = this.get('model').clone();
-      model.setProperties({
-        'enabled': true,
-        'accessMode': 'unrestricted',
-        'allowedIdentities': [],
-      });
-      this.get('model').save().then(() => {
-        this.set('access.enabled', true);
-        $('#loading-underlay, #loading-overlay').removeClass('hide').show();
-        setTimeout(function() {
-          window.location.href = "/login";
-        }, 2000);
-      });
-      /*
-      this.send('clearError');
       this.set('testing', true);
       this.get('fiware').authorizeTest((err,code) => {
         if ( err )
@@ -174,7 +163,6 @@ export default Ember.Controller.extend({
           this.set('testing', false);
         }
       });
-      */
     },
 
     gotCode: function(code) {
