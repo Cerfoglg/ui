@@ -153,8 +153,10 @@ export default Ember.Controller.extend({
         'allowedIdentities': [],
       });
       this.get('model').save().then(() => {
+        this.set('access.enabled', true);
+        $('#loading-underlay, #loading-overlay').removeClass('hide').show();
         setTimeout(function() {
-          window.location.href = "/";
+          window.location.href = "/login";
         }, 2000);
       });
       /*
