@@ -5,7 +5,7 @@
     <div class="banner bg-warning">
       <div class="banner-icon"><span class="icon icon-alert"></span></div>
       <div class="banner-message">
-        <p>Fiware not enabled</p>
+        <p>Warning: Make sure to setup an API key for admin access before activating Fiware Access Control!</p>
        </div>
     </div>
   {{/if}}
@@ -54,12 +54,14 @@
         <div class="col span-6">
           <div class="inline-form">
             <label>Client Redirect URI*</label>
-            {{input type="text" name="redirecturi" value=fiwareConfig.redirecturi classNames="form-control" placeholder="http://RANCHER_HOST:8080/admin/access/fiware?isTest=1" data-placeholder-text="http://RANCHER_HOST:8080/admin/access/fiware?isTest=1"}}
+            {{input type="text" name="redirecturi" value=fiwareConfig.redirecturi classNames="form-control" placeholder="This should match the callback URL in Fiware" data-placeholder-text="This should match the callback URL in Fiware"}}
           </div>
         </div>
       </div>
       <div class="row">
         <div class="inline-form">
+          <b>Click below to save and activate Access Control</b>
+          <hr/>
           <button class="btn bg-primary" style="display: block;margin: 0 auto;" {{action "save"}}>
             {{#if saving}}
               <i class="icon icon-spinner icon-spin"></i> {{t 'generic.saving'}}
@@ -73,23 +75,5 @@
       </div>
     </section>
 
-    <section>
-      <h3>Authenticate with Fiware</h3>
-      <hr/>
-
-      {{top-errors errors=errors}}
-
-      <div class="row">
-        <div class="col span-6">
-          <button disabled={{createDisabled}} class="btn bg-primary" {{action "authenticate"}}>
-            {{#if testing}}
-              <i class="icon icon-spinner icon-spin"></i> Authenticate
-            {{else}}
-              <i class="icon icon-fiware"></i> Authenticate
-            {{/if}}
-          </button>
-        </div>
-      </div>
-    </section>
   </form>
 {{/unless}}
